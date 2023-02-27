@@ -32,7 +32,10 @@ const showUsers = (users) => {
 }
 fetch(url)
     .then(response => response.json())
-    .then(data => showUsers(data))
+    .then(data => {
+        showUsers(data)
+
+    })
     .catch(error => console.log(error))
 
 const reloadShowUsers = () => {
@@ -60,7 +63,11 @@ const showUser = (user) => {
 }
 fetch('api/user/')
     .then(response => response.json())
-    .then(data => showUser(data))
+    .then(data => {
+        showUser(data)
+        detailsUser(data)
+    }
+)
     .catch(error => console.log(error))
 
 
@@ -175,7 +182,10 @@ editForm.addEventListener('submit', (e) => {
         })
     })
         .then(res => res.json())
-        .then(data => showUsers(data))
+        .then(data => {
+            showUsers(data)
+
+        } )
         .catch(error => console.log(error))
         .then(reloadShowUsers)
     modalEdit.hide()
@@ -237,4 +247,20 @@ let roleArray = (options) => {
         }
     }
     return array
+}
+
+let userNavbar = '';
+const detailsUser = (user) => {
+    const containerNavbar = document.getElementById("navbar-admin");
+    userNavbar += `
+         <span class="navbar-brand mb-0 h1" style="color:white; margin-right: 20px">${user.username}</span>
+         <span class="navbar-brand mb-0 h1" style="color:white">${user.roles.map(role => role.name)}</span>
+         <a href="/logout">
+         <button type="button" class="btn btn-primary mr float-right" style="margin-left: 800px">
+         Выйти
+         </button>
+         </a>                                    
+                                    
+    `
+    containerNavbar.innerHTML = userNavbar
 }
