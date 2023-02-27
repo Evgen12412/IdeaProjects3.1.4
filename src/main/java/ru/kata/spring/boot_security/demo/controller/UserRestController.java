@@ -22,9 +22,8 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<User> getUser(Principal principal) {
-        Optional<User> user = userService.findByUserName(principal.getName());
-        return new ResponseEntity<>(user.orElse(null), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findByUserName(principal.getName()).orElse(null), HttpStatus.OK);
     }
 }

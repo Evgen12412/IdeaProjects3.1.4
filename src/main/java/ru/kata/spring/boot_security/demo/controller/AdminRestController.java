@@ -30,19 +30,18 @@ public class AdminRestController {
         this.roleService = roleService;
     }
 
+
     @GetMapping
     public ResponseEntity<List<User>> showAllUsers() {
-        List<User> listUsers = userService.allUsers();
-        return  ResponseEntity.ok(listUsers);
+        return ResponseEntity.ok(userService.allUsers());
     }
 
-     @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getById(@PathVariable("id") Long id) {
-        User response = userService.findUserById(id);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
     }
 
-     @GetMapping("/principal")
+    @GetMapping("/principal")
     public Optional<User> getUser(Principal principal) {
         return userService.findByUserName(principal.getName());
     }
@@ -53,22 +52,22 @@ public class AdminRestController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-   @PutMapping()
+    @PutMapping
     public ResponseEntity<HttpStatus> editUser(@RequestBody User user) {
         userService.saveUser(user);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
-     @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
-      @GetMapping("/roles")
-    public  ResponseEntity<List<Role>> gerAllRoles(){
+    @GetMapping("/roles")
+    public ResponseEntity<List<Role>> gerAllRoles() {
         List<Role> roles = roleService.allRoles();
 
         if (roles.isEmpty()) {

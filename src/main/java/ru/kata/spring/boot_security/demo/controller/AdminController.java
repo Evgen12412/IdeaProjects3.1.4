@@ -37,27 +37,8 @@ public class AdminController {
         return "index";
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/admin";
-    }
 
 
-//    @PostMapping("/addNewUser")
-//    public String createUser(@ModelAttribute("user") User user) {
-//        if (userService.checkLogin(user)) {
-//            userService.saveUser(user);
-//            return "redirect:/admin";
-//        } else {
-//            return "/Error";
-//        }
-//    }
 
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
-        return "redirect:/admin";
-    }
 
 }
